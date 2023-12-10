@@ -36,7 +36,7 @@ const LeftSideBar = () => {
           className="flex gap-3 items-center mt-6"
         >
           <img
-            src={user.imageUrl || "/assets/images/profile-placeholder.svg"}
+            src={user.imageUrl || "/assets/images/profile-placeholder.jpg"}
             alt="profile  "
             className="h-14 w-14 rounded-full"
           />
@@ -83,7 +83,7 @@ const LeftSideBar = () => {
         className="shad-button_ghost"
       >
         <img src="/assets/icons/logout.svg" alt="logout" />
-      <p className="small-medium lg:base-mediumApp">Logout</p>
+        <p className="small-medium lg:base-mediumApp">Logout</p>
       </Button>
     </nav>
   );
