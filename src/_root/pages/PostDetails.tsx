@@ -14,7 +14,7 @@ const PostDetails = () => {
 
   const {user} = useUserContext();
   
-  const handleDeletePost = (e) => {
+  const handleDeletePost = () => {
     
   }
 

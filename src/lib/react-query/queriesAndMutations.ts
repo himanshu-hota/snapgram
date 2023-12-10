@@ -2,6 +2,7 @@ import {useQuery,useMutation,useQueryClient, useInfiniteQuery,} from '@tanstack/
 import { updatePost, createPost, createUserAccount, deletesSavedPost, getCurrentUser, getPostById, getRecentPosts, likePost, savePost, signInAccount, signOutAccount, deletePost, getInfinitePosts, searchPosts } from '../appwrite/api';
 import { INewPost, INewUser, IUpdatePost } from '@/types';
 import { QUERY_KEYS } from './queryKeys';
+import { Models } from 'appwrite';
 
 export const useCreateUserAccount = () => {
     return useMutation({
@@ -168,22 +169,41 @@ export const useDeletePost = () => {
 };
 
 
-export const useGetPosts = () => {
+// export const useGetPosts = () => {
   
+//   return useInfiniteQuery({
+//     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+//     queryFn: getInfinitePosts,
+//     getNextPageParam: (lastPage) => {
+//       if (lastPage && lastPage.documents.length === 0) return null;
+
+//       const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
+
+//       return lastId;
+//     },
+//   });
+
+// }
+
+Models.DocumentList < Models.Document>;
+
+export const useGetPosts = () => {
   return useInfiniteQuery({
-    queryKey:[QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn:getInfinitePosts,
-    getNextPageParam:(lastPage) => {
-      if(lastPage && lastPage.documents.length === 0) return null;
+    queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+    queryFn: getInfinitePosts,
+    getNextPageParam: (lastPage) => {
 
-      const lastId = lastPage?.documents[lastPage?.documents.length -1].$id;
+      console.log(lastPage);
 
+      if (lastPage && lastPage.documents.length === 0) return null;
+
+      const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
 
       return lastId;
     }
-  })
+  });
+};
 
-}
 
 
 export const useSearchPosts = (searchTerm:string) => {
