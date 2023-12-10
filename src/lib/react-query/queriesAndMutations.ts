@@ -2,7 +2,7 @@ import {useQuery,useMutation,useQueryClient, useInfiniteQuery,} from '@tanstack/
 import { updatePost, createPost, createUserAccount, deletesSavedPost, getCurrentUser, getPostById, getRecentPosts, likePost, savePost, signInAccount, signOutAccount, deletePost, getInfinitePosts, searchPosts } from '../appwrite/api';
 import { INewPost, INewUser, IUpdatePost } from '@/types';
 import { QUERY_KEYS } from './queryKeys';
-import { Models } from 'appwrite';
+
 
 export const useCreateUserAccount = () => {
     return useMutation({
@@ -185,14 +185,12 @@ export const useDeletePost = () => {
 
 // }
 
-Models.DocumentList < Models.Document>;
-
 export const useGetPosts = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
     queryFn: getInfinitePosts,
-    getNextPageParam: (lastPage) => {
-
+    initialPageParam: 1,
+    getNextPageParam: (lastPage:any) => {
       console.log(lastPage);
 
       if (lastPage && lastPage.documents.length === 0) return null;
@@ -200,7 +198,7 @@ export const useGetPosts = () => {
       const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
 
       return lastId;
-    }
+    },
   });
 };
 
