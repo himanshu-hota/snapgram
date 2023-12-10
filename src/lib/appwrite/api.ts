@@ -80,7 +80,7 @@ export const signOutAccount = async () => {
 export const getCurrentUser = async () => {
   try {
     const currentAccount = await account.get();
-
+    
     if (!account) throw Error;
 
     const currentUser = await databases.listDocuments(
